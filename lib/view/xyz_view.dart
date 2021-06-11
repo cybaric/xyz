@@ -1,12 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:xyz/view/view_info.dart';
 
 class XyzView extends StatelessWidget {
-  const XyzView({Key? key}) : super(key: key);
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  Stream<QuerySnapshot<Map<String, dynamic>>> collectionStream =
+      FirebaseFirestore.instance.collection('users').snapshots();
+  Stream<QuerySnapshot<Map<String, dynamic>>> collectionStream1 =
+      FirebaseFirestore.instance.collection('info').snapshots();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -18,15 +24,25 @@ class XyzView extends StatelessWidget {
               Text('skor'),
             ]),
           ),
-          body: TabBarView(children: [
-            ViewInfo().tabInfo(),
-            Text('b'),
-            Text('c'),
-          ],),
+          body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            stream: collectionStream,
+            builder: (context, snapshot) {
+              return TabBarView(
+                children: [
+                  ViewInfo().dataFirestorenama(snapshot),
+                  ViewInfo().dataFirestoreumur(snapshot),
+                  StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                    stream: collectionStream1,
+                    builder: (context, snapshot1) {
+                      return ViewInfo().dataFirestore1(snapshot1);
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
   }
-
-  
 }
