@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:xyz/view/view_info.dart';
+import 'package:xyz/view/view_pemain.dart';
 import 'package:xyz/view/view_team.dart';
 
 class XyzView extends StatefulWidget {
@@ -23,10 +24,7 @@ class _XyzViewState extends State<XyzView> {
 
   @override
   Widget build(BuildContext context) {
-    //FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    CollectionReference data = firestore.collection('team');
-    CollectionReference player = firestore.collection('player');
-    TextEditingController controller = TextEditingController();
+  
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -56,33 +54,13 @@ class _XyzViewState extends State<XyzView> {
                     return ViewTeam().dataTeam(snapshotTeam);
                   },
                 ),
-                ListView(
-                  children: [
-                    Container(
-                      height: 500,
-                      child: Column(
-                        children: [
-                          TextField(
-                            controller: controller,
-                          ),
-                          ElevatedButton(
-                              onPressed: () {
-                                data.add({'info': controller.text});
-                                controller.text = '';
-                              },
-                              child: Text('buat')),
-                        ],
-                      ),
-                    ),
-                  ],
+                StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  stream: collectionStreamPemain,
+                  builder: (_, snapshotTeam) {
+                    return ViewPemain().dataPemain(snapshotTeam);
+                  },
                 ),
-
-                // StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                //   stream: collectionStreamPemain,
-                //   builder: (context, snapshotPemain) {
-                //     return ViewPemain().dataPemain(snapshotPemain);
-                //   },
-                // ),
+                
               ],
             ),
           )),

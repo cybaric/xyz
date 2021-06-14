@@ -32,7 +32,7 @@ class ViewInfo {
             return AddInfo();
           }));
         },
-        child: Text('Add Info'));
+        child: Text('Tambah Info'));
   }
 
   Card card(AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshotInfo,
