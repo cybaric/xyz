@@ -17,10 +17,10 @@ class _XyzViewState extends State<XyzView> {
       FirebaseFirestore.instance.collection('info').orderBy('skor').snapshots();
 
   Stream<QuerySnapshot<Map<String, dynamic>>> collectionStreamTeam =
-      FirebaseFirestore.instance.collection('team').snapshots();
+      FirebaseFirestore.instance.collection('team').orderBy('tahun').snapshots();
 
   Stream<QuerySnapshot<Map<String, dynamic>>> collectionStreamPemain =
-      FirebaseFirestore.instance.collection('pemain').snapshots();
+      FirebaseFirestore.instance.collection('pemain').orderBy('no').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +56,8 @@ class _XyzViewState extends State<XyzView> {
                 ),
                 StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream: collectionStreamPemain,
-                  builder: (_, snapshotTeam) {
-                    return ViewPemain().dataPemain(snapshotTeam);
+                  builder: (_, snapshotPemain) {
+                    return ViewPemain().dataPemain(snapshotPemain);
                   },
                 ),
                 

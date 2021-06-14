@@ -34,7 +34,7 @@ class ViewTeam {
         child: Text('Tambah Tim'));
   }
 
-  Card card(AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshotPemain,
+  Card card(AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshotTeam,
       int index) {
     return Card(
       child: Container(
@@ -43,23 +43,23 @@ class ViewTeam {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            snapshotPemain.data!.docs[index].data()['tahun'] != '0000'
+            snapshotTeam.data!.docs[index].data()['tahun'] != '0000'
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Nama : ' +
-                          snapshotPemain.data!.docs[index]
+                          snapshotTeam.data!.docs[index]
                               .data()['nama']
                               .toString()),
                       Text('Tahun : ' +
-                          snapshotPemain.data!.docs[index]
+                          snapshotTeam.data!.docs[index]
                               .data()['tahun']
                               .toString()),
                       Container(
                         width: 220,
                         child: Text(
                           'Alamat : ' +
-                              snapshotPemain.data!.docs[index]
+                              snapshotTeam.data!.docs[index]
                                   .data()['alamat']
                                   .toString(),
                           style: TextStyle(),
@@ -70,7 +70,7 @@ class ViewTeam {
                         width: 220,
                         child: Text(
                           'Kota : ' +
-                              snapshotPemain.data!.docs[index]
+                              snapshotTeam.data!.docs[index]
                                   .data()['kota']
                                   .toString(),
                         ),
@@ -82,10 +82,10 @@ class ViewTeam {
                     '                 Info Tim',
                     style: TextStyle(color: Colors.greenAccent, fontSize: 24),
                   )),
-            if (snapshotPemain.data!.docs[index].data()['tahun'] != '0000')
+            if (snapshotTeam.data!.docs[index].data()['tahun'] != '0000')
               GestureDetector(
                   onTap: () {
-                    team.doc(snapshotPemain.data!.docs[index].id).delete();
+                    team.doc(snapshotTeam.data!.docs[index].id).delete();
                   },
                   child: Icon(
                     Icons.delete_forever,
