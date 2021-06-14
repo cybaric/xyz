@@ -12,8 +12,10 @@ class _AddInfoState extends State<AddInfo> {
   @override
   Widget build(BuildContext context) {
     CollectionReference info = firestore.collection('info');
+    TextEditingController controllerAddVs = TextEditingController();
     TextEditingController controllerAddSkor = TextEditingController();
     TextEditingController controllerAddTime = TextEditingController();
+    TextEditingController controllerAddGoalscorer = TextEditingController();
 
     return Scaffold(
       body: Container(
@@ -24,26 +26,54 @@ class _AddInfoState extends State<AddInfo> {
           SizedBox(
             height: 10,
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.center,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('add Vs : '),
+              Container(
+                height: 40,
+                width: 200,
+                child: TextField(
+                  controller: controllerAddVs,
+                ),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Add Skor : '),
               Container(
                 height: 40,
-                width: 100,
+                width: 200,
                 child: TextField(
                   controller: controllerAddSkor,
                 ),
               )
             ],
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.center,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Add Time : '),
               Container(
                 height: 40,
-                width: 100,
+                width: 200,
                 child: TextField(
                   controller: controllerAddTime,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Goalscorer : '),
+              Container(
+                height: 40,
+                width: 200,
+                child: TextField(
+                  controller: controllerAddGoalscorer,
                 ),
               ),
             ],
@@ -51,11 +81,15 @@ class _AddInfoState extends State<AddInfo> {
           ElevatedButton(
               onPressed: () {
                 info.add({
+                  'vs': controllerAddVs.text,
                   'skor': controllerAddSkor.text,
-                  'time': controllerAddTime.text
+                  'time': controllerAddTime.text,
+                  'pencetak gol': controllerAddGoalscorer.text
                 });
-                controllerAddSkor.text = 'berhasil';
-                controllerAddTime.text = 'berhasil';
+                controllerAddVs.text = 'saved';
+                controllerAddSkor.text = 'saved';
+                controllerAddTime.text = 'saved';
+                controllerAddGoalscorer.text = 'saved';
               },
               child: Text('Add'))
         ]),

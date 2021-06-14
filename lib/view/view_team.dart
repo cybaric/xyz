@@ -15,14 +15,14 @@ class ViewTeam {
               Container(
                 height: 200,
                 child: Column(children: [
-                  Text(snapshotTeam.data!.docs[index].data()['tim'].toString()),
+                  Text(snapshotTeam.data!.docs[index].data()['alamat'].toString()),
                   Text(snapshotTeam.data!.docs[index]
                       .data()['alamat']
                       .toString()),
                   Text(
-                      snapshotTeam.data!.docs[index].data()['kota'].toString()),
+                      snapshotTeam.data!.docs[index].data()['tahun dibentuk'].toString()),
                   Text(snapshotTeam.data!.docs[index]
-                      .data()['tahun']
+                      .data()['nama pemain']
                       .toString()),
                 ]),
               ),

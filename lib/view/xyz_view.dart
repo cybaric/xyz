@@ -25,6 +25,7 @@ class _XyzViewState extends State<XyzView> {
   Widget build(BuildContext context) {
     //FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     CollectionReference data = firestore.collection('team');
+    CollectionReference player = firestore.collection('player');
     TextEditingController controller = TextEditingController();
 
     return MaterialApp(

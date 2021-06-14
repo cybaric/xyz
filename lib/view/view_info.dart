@@ -43,17 +43,48 @@ class ViewInfo {
         padding: EdgeInsets.all(5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [if (snapshotInfo.data!.docs[index].data()['skor'] != '0000') // data awal agar button add muncul
-            Column(
-              children: [
-                
-                  Text('Skor Akhir : ' +
-                      snapshotInfo.data!.docs[index].data()['skor'].toString()),
-                
-                  Text('Waktu Gol Pertama : ' +
-                      snapshotInfo.data!.docs[index].data()['time'].toString()),
-              ],
-            ),
+          children: [
+            snapshotInfo.data!.docs[index].data()['skor'] != '0000'
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Versus : ' +
+                          snapshotInfo.data!.docs[index]
+                              .data()['vs']
+                              .toString()),
+                      Text('Skor Akhir : ' +
+                          snapshotInfo.data!.docs[index]
+                              .data()['skor']
+                              .toString()),
+                      Container(
+                        width: 220,
+                        child: Text(
+                          'Waktu Gol : ' +
+                              snapshotInfo.data!.docs[index]
+                                  .data()['time']
+                                  .toString(),
+                          style: TextStyle(),
+                          maxLines: 4,
+                        ),
+                      ),
+                      Container(
+                        width: 220,
+                        child: Text(
+                          'Pencetak Gol : ' +
+                              snapshotInfo.data!.docs[index]
+                                  .data()['pencetak gol']
+                                  .toString(),
+                          style: TextStyle(),
+                          maxLines: 4,
+                        ),
+                      ),
+                    ],
+                  )
+                : Center(
+                    child: Text(
+                    '         Info Pertandingan',
+                    style: TextStyle(color: Colors.greenAccent, fontSize: 24),
+                  )),
             if (snapshotInfo.data!.docs[index].data()['skor'] != '0000')
               GestureDetector(
                   onTap: () {
@@ -62,7 +93,7 @@ class ViewInfo {
                   child: Icon(
                     Icons.delete_forever,
                     color: Colors.pinkAccent,
-                  ))
+                  )),
           ],
         ),
       ),
